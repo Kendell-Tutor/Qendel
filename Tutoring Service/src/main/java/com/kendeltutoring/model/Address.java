@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Embeddable
+
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

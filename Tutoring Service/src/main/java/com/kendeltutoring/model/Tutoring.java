@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Tutoring {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +17,14 @@ public class Tutoring {
     private String lastName;
     private String experience;
     private String Course;
-    @Embedded
-    private Address address;
+//    @Embedded
+//    private Address address;
 
+    public Tutoring(String firstName, String lastName, String experience, String course) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.experience = experience;
+        Course = course;
+//        this.address = address;
+    }
 }
