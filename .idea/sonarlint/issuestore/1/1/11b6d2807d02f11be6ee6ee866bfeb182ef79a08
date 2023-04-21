@@ -1,11 +1,0 @@
-
-V
-java:S1128";Remove this unused import 'jakarta.persistence.Embeddable'.(€ÊÖÎşÿÿÿÿ
-@
-java:S1068"*Remove this unused "street" private field.(›¸
->
-java:S1068"(Remove this unused "city" private field.(“øÌà
-D
-java:S1068")Remove this unused "state" private field.(µîŠ©øÿÿÿÿ
-F
-java:S1068"+Remove this unused "zipcode" private field.(‚Ûõ¢ûÿÿÿÿ

@@ -1,5 +1,4 @@
 package com.kendeltutoring.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Tutoring {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
