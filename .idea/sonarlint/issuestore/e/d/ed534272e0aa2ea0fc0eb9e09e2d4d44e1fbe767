@@ -1,0 +1,10 @@
+
+h
+java:S1192N"FDefine a constant instead of duplicating this literal "ADMIN" 3 times.(‚ê¯üÿÿÿÿ8ëîˆú0
+_
+java:S1874"DRemove this use of "WebSecurityConfigurerAdapter"; it is deprecated.(Ã÷ ´ıÿÿÿÿ
+]	java:S125U"<This block of commented-out lines of code should be removed.(ä´øùüÿÿÿÿ8ÒÚÆŠú0
+
+java:S1128"qRemove this unused import 'org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter'.(÷ìïŠ8ÓÚÆŠú0
+N
+java:S1128"1Remove this unused import 'javax.servlet.Filter'.(şé®ä8ÓÚÆŠú0
