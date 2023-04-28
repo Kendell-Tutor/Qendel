@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-public class Student extends User{
+public class Student extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

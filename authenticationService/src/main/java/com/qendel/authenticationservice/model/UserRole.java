@@ -1,6 +1,6 @@
 package com.qendel.authenticationservice.model;
 
-public enum EnumRole {
+public enum UserRole {
     STUDENT,
     TUTOR,
     ADMIN

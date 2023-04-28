@@ -1,6 +1,6 @@
 package com.qendel.authenticationservice.registration;
 
-import com.qendel.authenticationservice.model.AppUserRole;
+import com.qendel.authenticationservice.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,5 +15,5 @@ public class RegistrationRequest {
     private final String lastName;
     private final String email;
     private final String password;
-    private AppUserRole role;
+    private UserRole role;
 }

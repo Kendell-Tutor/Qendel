@@ -21,4 +21,5 @@ public class RegistrationController {
         return registrationService.confirmToken(token);
     }
 
+
 }
