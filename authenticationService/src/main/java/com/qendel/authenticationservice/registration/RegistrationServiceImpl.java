@@ -8,7 +8,7 @@ import com.qendel.authenticationservice.model.UserRole;
 import com.qendel.authenticationservice.registration.token.ConfirmationToken;
 import com.qendel.authenticationservice.registration.token.ConfirmationTokenService;
 import com.qendel.authenticationservice.repository.AppUserRepository;
-import com.qendel.authenticationservice.service.impl.AppUserService;
+import com.qendel.authenticationservice.service.impl.AppUserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
-    private final AppUserService appUserService;
+    private final AppUserServiceImpl appUserService;
     @Autowired
     private final EmailValidator emailValidator;
     @Autowired

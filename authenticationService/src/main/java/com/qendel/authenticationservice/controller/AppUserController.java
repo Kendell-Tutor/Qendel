@@ -1,7 +1,7 @@
 package com.qendel.authenticationservice.controller;
 
 import com.qendel.authenticationservice.model.AppUser;
-import com.qendel.authenticationservice.service.impl.AppUserService;
+import com.qendel.authenticationservice.service.impl.AppUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class AppUserController {
 
     @Autowired
-    private AppUserService service;
+    private AppUserServiceImpl service;
 
     @GetMapping("/admin")
    // @PreAuthorize("hasRole('ADMIN')")
@@ -90,32 +90,4 @@ public class AppUserController {
     public List<AppUser> getAllStudents(){
         return service.findAllUsers();
     }
-
-//    @GetMapping("/tutors")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public List<AppUser> getAllTutors(){
-//        return service.getAllTutors();
-//    }
-
-//    @GetMapping("/admin/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public AppUser getUserById(@PathVariable("id")Long id){
-//        return service.findUserById(id).get();
-//    }
-//    @GetMapping("/username/{userName}")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public AppUser findUserByName(@PathVariable("userName")String userName){
-//        return service.findUserByName(userName).get();
-//    }
-//    @GetMapping("/email/{email}")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public AppUser findUserByEmail(@PathVariable("email")String email){
-//        return service.findUserByEmail(email).get();
-//    }
-
-//    @GetMapping("/admin/role/{role}")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public List<AppUser> getAllUserByRole(@PathVariable("role")String role){
-//        return service.findAllUsersByRole(role);
-//    }
 }

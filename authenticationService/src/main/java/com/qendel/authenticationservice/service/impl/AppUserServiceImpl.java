@@ -5,6 +5,7 @@ import com.qendel.authenticationservice.model.AppUser;
 import com.qendel.authenticationservice.registration.token.ConfirmationToken;
 import com.qendel.authenticationservice.registration.token.ConfirmationTokenService;
 import com.qendel.authenticationservice.repository.AppUserRepository;
+import com.qendel.authenticationservice.service.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AppUserService implements UserDetailsService {
+public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
 
     private final static String USER_NOT_FOUND_MSG =
             "user with email %s not found";
@@ -86,28 +87,29 @@ public class AppUserService implements UserDetailsService {
      * for list user retrieval
      */
 
+    @Override
     public List<AppUser> findAllUsers() {
         return appUserRepository.findAll();
     }
-
+    @Override
     public Optional<AppUser> findUserById(Long id) {
         return appUserRepository.findAll().stream()
                 .filter(u -> u.getId() == id)
                 .findFirst();
     }
-
+    @Override
     public Optional<AppUser> findUserByName(String name) {
         return appUserRepository.findAll().stream()
                 .filter(u -> u.getFirstName().contains(name))
                 .findFirst();
     }
-
+    @Override
     public List<AppUser> findAllUsersByRole(String role) {
         return appUserRepository.findAll().stream()
                 .filter(r -> r.getUserRole().toString().equals(role.toUpperCase()))
                 .collect(Collectors.toList());
     }
-
+    @Override
     public Optional<AppUser> findUserByEmail(String email) {
         return appUserRepository.findAll().stream()
                 .filter(e -> e.getEmail().equals(email))
