@@ -15,7 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -77,5 +80,37 @@ public class AppUserService implements UserDetailsService {
 
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
+    }
+
+    /**
+     * for list user retrieval
+     */
+
+    public List<AppUser> findAllUsers() {
+        return appUserRepository.findAll();
+    }
+
+    public Optional<AppUser> findUserById(Long id) {
+        return appUserRepository.findAll().stream()
+                .filter(u -> u.getId() == id)
+                .findFirst();
+    }
+
+    public Optional<AppUser> findUserByName(String name) {
+        return appUserRepository.findAll().stream()
+                .filter(u -> u.getFirstName().contains(name))
+                .findFirst();
+    }
+
+    public List<AppUser> findAllUsersByRole(String role) {
+        return appUserRepository.findAll().stream()
+                .filter(r -> r.getUserRole().toString().equals(role.toUpperCase()))
+                .collect(Collectors.toList());
+    }
+
+    public Optional<AppUser> findUserByEmail(String email) {
+        return appUserRepository.findAll().stream()
+                .filter(e -> e.getEmail().equals(email))
+                .findFirst();
     }
 }

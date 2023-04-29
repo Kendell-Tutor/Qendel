@@ -19,3 +19,11 @@ FTutoring Service/src/main/java/com/kendeltutoring/dto/TutoringDto.java,d/3/d38
 WTutoring Service/src/main/java/com/kendeltutoring/service/impl/TutoringServiceImpl.java,9/5/9548df3e8a2b794306d5d19dbf24a43d32e77a51
 N
 authenticationService/mvnw.cmd,6/e/6ef76599956c24de025a7e3f89e77392f75415d1
+•
+eauthenticationService/src/main/java/com/qendel/authenticationservice/registration/EmailValidator.java,b/7/b7935885b430765f3b9a236e030b33592c72375b
+š
+jauthenticationService/src/main/java/com/qendel/authenticationservice/registration/RegistrationRequest.java,3/7/374381d96dc9b096bc003343693ad7a94a4dd045
+ž
+nauthenticationService/src/main/java/com/qendel/authenticationservice/registration/RegistrationServiceImpl.java,7/9/7952c6a432051a89460042fea01d31624c1cc4c9
+–
+fauthenticationService/src/main/java/com/qendel/authenticationservice/repository/AppUserRepository.java,5/9/59c4fcfa633cd7043991b2e436332f67ed1c4f8d

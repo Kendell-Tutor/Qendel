@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Customer Review/CustomerReview.iml" filepath="$PROJECT_DIR$/Customer Review/CustomerReview.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Tutoring Service/KendelTutoring.iml" filepath="$PROJECT_DIR$/Tutoring Service/KendelTutoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Qendel.iml" filepath="$PROJECT_DIR$/.idea/Qendel.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Scheduling Service/SchedulingService.iml" filepath="$PROJECT_DIR$/Scheduling Service/SchedulingService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Student Service/StudentService.iml" filepath="$PROJECT_DIR$/Student Service/StudentService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/authenticationService/authenticationService.iml" filepath="$PROJECT_DIR$/authenticationService/authenticationService.iml" />
     </modules>
   </component>
 </project>

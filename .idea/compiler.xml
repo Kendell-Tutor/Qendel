@@ -15,12 +15,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="authenticationService" target="15" />
-      <module name="CustomerReview" target="17" />
-      <module name="KendelTutoring" target="17" />
-      <module name="SchedulingService" target="17" />
       <module name="Student" target="17" />
-      <module name="StudentService" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -27,20 +27,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**")
-                .permitAll()
+                .antMatchers("/api/v1/users/admin/**").permitAll()//.hasRole("ADMIN")//.hasRole("ADMIN")
+                .antMatchers("/api/v1/users/tutor/**").permitAll()//.hasAnyRole("TUTOR", "ADMIN")//.hasAnyRole("TUTOR", "ADMIN")
+                .antMatchers("/api/v1/users/student/**").permitAll()//.hasAnyRole("STUDENT", "TUTOR", "ADMIN")//.hasAnyRole("STUDENT", "TUTOR", "ADMIN")
+                .antMatchers("/api/v1/registration/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest()
-                .authenticated().and()
-                .formLogin();
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID");
+                .authenticated()
+                .and()
+                .formLogin()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout");
     }
 
 //    @Override
