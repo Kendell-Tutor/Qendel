@@ -1,6 +1,8 @@
 package com.qendel.authenticationservice.controller;
 
+import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.User;
 import com.qendel.authenticationservice.service.impl.AppUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +42,8 @@ public class AppUserController {
     }
     @GetMapping("/admin/all")
    // @PreAuthorize("hasRole('ADMIN')")
-    public List<AppUser> findAllUsers() {
+    public List<AppUserDto> findAllUsers() {
         var allUsers = service.findAllUsers();
-        allUsers.forEach(System.out::println);
         if (allUsers.isEmpty()) {
             System.out.println("There is no user registered at this time");
         }
@@ -50,7 +51,7 @@ public class AppUserController {
     }
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/id/{id}")
-    public Optional<AppUser> findUserById(@PathVariable Long id) {
+    public Optional<AppUserDto> findUserById(@PathVariable Long id) {
         var user = service.findUserById(id);
         if (!user.isPresent()) {
             System.out.println("There is no user registered with the id  : " + id + " at this time");
@@ -59,7 +60,7 @@ public class AppUserController {
     }
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/name/{name}")
-    public Optional<AppUser> findUserByName(@PathVariable String name) {
+    public Optional<AppUserDto> findUserByName(@PathVariable String name) {
         var user = service.findUserByName(name);
         if (!user.isPresent()) {
             System.out.println("There is no user registered with the name : " + name + " at this time");
@@ -68,7 +69,7 @@ public class AppUserController {
     }
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/role/{role}")
-    public List<AppUser> findAllUsersByRoles(@PathVariable String role) {
+    public List<AppUserDto> findAllUsersByRoles(@PathVariable String role) {
         var user = service.findAllUsersByRole(role);
         if (!user.isEmpty()) {
             System.out.println("There is no user registered with the role " + role + " at this time");
@@ -77,7 +78,7 @@ public class AppUserController {
     }
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/email/{email}")
-    public Optional<AppUser> findUserByEmail(@PathVariable String email) {
+    public Optional<AppUserDto> findUserByEmail(@PathVariable String email) {
         var user = service.findUserByEmail(email);
         if (!user.isPresent()) {
             System.out.println("There is no user registered with the email : " + email + " at this time");
@@ -87,7 +88,17 @@ public class AppUserController {
 
     @GetMapping("/admin/students")
     //@PreAuthorize("hasRole('ADMIN')")
-    public List<AppUser> getAllStudents(){
+    public List<AppUserDto> getAllStudents(){
         return service.findAllUsers();
+    }
+    @GetMapping("/view/{id}")
+    //@PreAuthorize("hasRole('ADMIN')")
+    public AppUserDto viewProfile(@PathVariable Long id){
+        return service.viewProfile(id);
+    }
+    @PutMapping("/update/{id}")
+    //@PreAuthorize("hasRole('ADMIN')")
+    public AppUserDto updateProfile(@PathVariable Long id, @RequestBody AppUser appUser){
+        return service.updateProfile(id,appUser);
     }
 }
