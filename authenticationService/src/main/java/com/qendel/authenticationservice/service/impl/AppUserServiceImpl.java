@@ -3,14 +3,15 @@ package com.qendel.authenticationservice.service.impl;
 
 import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.Video;
 import com.qendel.authenticationservice.registration.token.ConfirmationToken;
 import com.qendel.authenticationservice.registration.token.ConfirmationTokenService;
 import com.qendel.authenticationservice.repository.AppUserRepository;
+import com.qendel.authenticationservice.repository.VideoRepository;
 import com.qendel.authenticationservice.service.AppUserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,11 +26,13 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
+public class AppUserServiceImpl implements UserDetailsService, AppUserService {
 
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
     @Autowired
     private final AppUserRepository appUserRepository;
+    @Autowired
+    private VideoRepository videoRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
@@ -41,9 +44,7 @@ public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         return appUserRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException(
-                                String.format(USER_NOT_FOUND_MSG, email)));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
     public String signUpUser(AppUser appUser) {
@@ -58,8 +59,7 @@ public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
             throw new IllegalStateException("email already taken for sure --------");
         }
 
-        String encodedPassword = bCryptPasswordEncoder
-                .encode(appUser.getPassword());
+        String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
 
         appUser.setPassword(encodedPassword);
 
@@ -74,8 +74,7 @@ public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
                 appUser
         );
 
-        confirmationTokenService.saveConfirmationToken(
-                confirmationToken);
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
 
 //        TODO: SEND EMAIL
 
@@ -97,39 +96,43 @@ public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
                 .map(m -> modelMapper.map(allUsers, AppUserDto.class))
                 .collect(Collectors.toList());
     }
+
     @Override
     public Optional<AppUserDto> findUserById(Long id) {
         return appUserRepository.findAll().stream()
                 .filter(u -> u.getId() == id)
-                .map(m -> modelMapper.map(m,AppUserDto.class))
+                .map(m -> modelMapper.map(m, AppUserDto.class))
                 .findFirst();
     }
+
     @Override
     public Optional<AppUserDto> findUserByName(String name) {
         return appUserRepository.findAll().stream()
                 .filter(u -> u.getFirstName().contains(name))
-                .map(m -> modelMapper.map(m,AppUserDto.class))
+                .map(m -> modelMapper.map(m, AppUserDto.class))
                 .findFirst();
     }
+
     @Override
     public List<AppUserDto> findAllUsersByRole(String role) {
         return appUserRepository.findAll().stream()
                 .filter(r -> r.getUserRole().toString().equals(role.toUpperCase()))
-                .map(m -> modelMapper.map(m,AppUserDto.class))
+                .map(m -> modelMapper.map(m, AppUserDto.class))
                 .collect(Collectors.toList());
     }
+
     @Override
     public Optional<AppUserDto> findUserByEmail(String email) {
         return appUserRepository.findAll().stream()
                 .filter(e -> e.getEmail().equals(email))
-                .map(m -> modelMapper.map(m,AppUserDto.class))
+                .map(m -> modelMapper.map(m, AppUserDto.class))
                 .findFirst();
     }
 
     @Override
     public AppUserDto viewProfile(Long id) {
-       var userView = appUserRepository.findById(id).get();
-       return modelMapper.map(userView,AppUserDto.class);
+        var userView = appUserRepository.findById(id).get();
+        return modelMapper.map(userView, AppUserDto.class);
     }
 
     @Override
@@ -149,9 +152,19 @@ public class AppUserServiceImpl implements UserDetailsService ,AppUserService {
             user.setDateOfBirth(updatedUser.getDateOfBirth());
 
             appUserRepository.save(user);
-            return modelMapper.map(user,AppUserDto.class);
+            return modelMapper.map(user, AppUserDto.class);
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Video> searchVideosByPrice(int price) {
+        return videoRepository.findAllByPriceIsLessThanOrPriceEquals(price);
+    }
+
+    @Override
+    public List<Video> searchVideoByTutorName(String name) {
+        return null;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api/v1/registration")
 @AllArgsConstructor
 public class RegistrationController {
+
     @Autowired
     private final RegistrationService registrationService;
 
@@ -20,6 +21,5 @@ public class RegistrationController {
     public String confirm(@RequestParam("token") String token) {
         return registrationService.confirmToken(token);
     }
-
 
 }

@@ -4,6 +4,9 @@ import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
 import com.qendel.authenticationservice.model.User;
 import com.qendel.authenticationservice.service.AppUserService;
+
+import com.qendel.authenticationservice.model.Video;
+
 import com.qendel.authenticationservice.service.impl.AppUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -101,5 +104,10 @@ public class AppUserController {
     //@PreAuthorize("hasRole('ADMIN')")
     public AppUserDto updateProfile(@PathVariable Long id, @RequestBody AppUser appUser){
         return service.updateProfile(id,appUser);
+    }
+
+    @GetMapping("/search/{price}")
+    public List<Video> searchVideosByPrice(@PathVariable int price){
+        return service.searchVideosByPrice(price);
     }
 }
