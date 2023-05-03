@@ -3,6 +3,7 @@ package com.qendel.authenticationservice.controller;
 import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
 import com.qendel.authenticationservice.model.User;
+import com.qendel.authenticationservice.service.AppUserService;
 import com.qendel.authenticationservice.service.impl.AppUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class AppUserController {
 
     @Autowired
-    private AppUserServiceImpl service;
+    private AppUserService service;
 
     @GetMapping("/admin")
    // @PreAuthorize("hasRole('ADMIN')")
