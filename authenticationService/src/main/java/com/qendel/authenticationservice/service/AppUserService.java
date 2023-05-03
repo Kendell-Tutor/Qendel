@@ -2,6 +2,7 @@ package com.qendel.authenticationservice.service;
 
 import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.Video;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,4 +15,7 @@ public interface AppUserService {
     Optional<AppUserDto> findUserByEmail(String email);
     AppUserDto viewProfile(Long id);
     AppUserDto updateProfile(Long id, AppUser appUser);
+    List<Video> searchVideosByPrice(int price);
+    List<Video> searchVideoByTutorName(String name);
+
 }

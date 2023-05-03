@@ -1,0 +1,12 @@
+
+|
+java:S3305"`Inject this field value directly into "daoAuthenticationProvider", the only method that uses it.(–×™U8†¤”ïı0
+}
+java:S3305"`Inject this field value directly into "daoAuthenticationProvider", the only method that uses it.(¾§©¶8†¤”ïı0
+ 
+java:S4601!"‚Reorder the URL patterns from most to less specific, the pattern "/api/v1/users/admin/**" should occurs before "/api/v1/users/**".(ñ²äÏ8˜¤”ïı0
+ 
+java:S4601""‚Reorder the URL patterns from most to less specific, the pattern "/api/v1/users/tutor/**" should occurs before "/api/v1/users/**".(çıü8™¤”ïı0
+§
+java:S4601#"„Reorder the URL patterns from most to less specific, the pattern "/api/v1/users/student/**" should occurs before "/api/v1/users/**".(í¼¯†ùÿÿÿÿ8™¤”ïı0
+]	java:S1251"<This block of commented-out lines of code should be removed.(¸¢˜Ïøÿÿÿÿ8 ¤”ïı0

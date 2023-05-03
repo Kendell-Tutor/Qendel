@@ -1,7 +1,6 @@
 package com.qendel.authenticationservice.registration;
 
 
-
 import com.qendel.authenticationservice.email.EmailSender;
 import com.qendel.authenticationservice.model.AppUser;
 import com.qendel.authenticationservice.model.UserRole;
@@ -36,8 +35,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private PasswordEncoder passwordEncoder;
     @Override
     public String register(RegistrationRequest request) {
-        boolean isValidEmail = emailValidator.
-                test(request.getEmail());
+        boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
@@ -113,8 +111,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
-                .orElseThrow(() ->
-                        new IllegalStateException("token not found"));
+                .orElseThrow(() -> new IllegalStateException("token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
             throw new IllegalStateException("email already confirmed");
@@ -200,7 +197,4 @@ public class RegistrationServiceImpl implements RegistrationService {
                 "\n" +
                 "</div></div>";
     }
-
-
-
 }
