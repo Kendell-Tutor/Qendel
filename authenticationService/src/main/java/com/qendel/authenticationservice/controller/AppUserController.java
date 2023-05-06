@@ -2,6 +2,7 @@ package com.qendel.authenticationservice.controller;
 
 import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.Tutor;
 import com.qendel.authenticationservice.model.User;
 import com.qendel.authenticationservice.service.AppUserService;
 
@@ -34,6 +35,12 @@ public class AppUserController {
         return "Student Board.";
     }
 
+    @GetMapping("/search")
+    //@PreAuthorize("hasRole('STUDENT')")
+    public Tutor searchTutorByName(@RequestParam String name) {
+
+        return service.searchTutorNameByUser(name);
+    }
     @GetMapping("/tutor")
    // @PreAuthorize("hasRole('TUTOR')")
     public String tutorAccess() {

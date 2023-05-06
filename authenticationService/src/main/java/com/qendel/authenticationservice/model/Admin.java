@@ -15,10 +15,13 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Data
 @Entity
-public class Admin extends User {
+public class Admin extends AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+    public Admin(String firstName, String lastName, String email, String password, UserRole userRole) {
+        super(firstName, lastName, email, password, userRole);
+    }
 
 }

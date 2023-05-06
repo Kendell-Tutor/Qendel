@@ -1,6 +1,7 @@
 package com.qendel.authenticationservice.repository;
 
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.Tutor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     Optional<AppUser> findByEmail(String email);
+    Tutor getAppUserByUserRole(String name);
     Optional<AppUser> findByEmailAndPassword(String email, String password);
 
     @Transactional

@@ -16,6 +16,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class AppUser implements UserDetails {
 
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
@@ -28,7 +29,9 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
     private Boolean locked = false;
+
     private Boolean enabled = false;
     private String phoneNumber;
     private char gender;

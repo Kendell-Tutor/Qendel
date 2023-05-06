@@ -2,8 +2,7 @@ package com.qendel.authenticationservice.registration;
 
 
 import com.qendel.authenticationservice.email.EmailSender;
-import com.qendel.authenticationservice.model.AppUser;
-import com.qendel.authenticationservice.model.UserRole;
+import com.qendel.authenticationservice.model.*;
 import com.qendel.authenticationservice.registration.token.ConfirmationToken;
 import com.qendel.authenticationservice.registration.token.ConfirmationTokenService;
 import com.qendel.authenticationservice.repository.AppUserRepository;
@@ -25,8 +24,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final EmailValidator emailValidator;
     @Autowired
     private final ConfirmationTokenService confirmationTokenService;
-    @Autowired
-    private final EmailSender emailSender;
+//    @Autowired
+//    private final EmailSender emailSender;
     @Autowired
     private final AppUserRepository appUserRepository;
 //    @Autowired
@@ -45,17 +44,17 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (role != null) {
             switch (role) {
                 case "STUDENT":
-                    token = appUserService.signUpUser(new AppUser(
+                    token = appUserService.signUpUser(new Student(
                             request.getFirstName(), request.getLastName(),
                             request.getEmail(), request.getPassword(), UserRole.STUDENT));
                     break;
                 case "TUTOR":
-                    token = appUserService.signUpUser(new AppUser(
+                    token = appUserService.signUpUser(new Tutor(
                             request.getFirstName(), request.getLastName(),
                             request.getEmail(), request.getPassword(), UserRole.TUTOR));
                     break;
                 case "ADMIN":
-                    token = appUserService.signUpUser(new AppUser(request.getFirstName(),
+                    token = appUserService.signUpUser(new Admin(request.getFirstName(),
                             request.getLastName(), request.getEmail(),
                             request.getPassword(), UserRole.ADMIN));
                     break;
@@ -72,9 +71,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 //                request.getEmail(),
 //                buildEmail(request.getFirstName(), link));
 
-        emailSender.sendEMail(
-                request.getEmail(),
-                buildEmail(request.getFirstName(), link),"Confirm");
+//        emailSender.sendEMail(
+//                request.getEmail(),
+//                buildEmail(request.getFirstName(), link),"Confirm");
 
         return token;
     }

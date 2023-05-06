@@ -3,10 +3,13 @@ package com.qendel.authenticationservice.service.impl;
 
 import com.qendel.authenticationservice.dto.AppUserDto;
 import com.qendel.authenticationservice.model.AppUser;
+import com.qendel.authenticationservice.model.Rating;
+import com.qendel.authenticationservice.model.Tutor;
 import com.qendel.authenticationservice.model.Video;
 import com.qendel.authenticationservice.registration.token.ConfirmationToken;
 import com.qendel.authenticationservice.registration.token.ConfirmationTokenService;
 import com.qendel.authenticationservice.repository.AppUserRepository;
+import com.qendel.authenticationservice.repository.TutorRepository;
 import com.qendel.authenticationservice.repository.VideoRepository;
 import com.qendel.authenticationservice.service.AppUserService;
 import lombok.AllArgsConstructor;
@@ -39,6 +42,8 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private final ConfirmationTokenService confirmationTokenService;
+    @Autowired
+    private TutorRepository tutorRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email)
@@ -46,7 +51,16 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
-
+    @Override
+    public Tutor searchTutorNameByUser(String name) {
+        Tutor existingTutor = tutorRepository.getTutorByFirstName(name);
+         //AppUser existingUser= appUserRepository.findByEmail()
+        return existingTutor;
+//        return appUserRepository.findAll().stream()
+//                .filter(u -> u.getFirstName().contains(name))
+//                .map(m -> modelMapper.map(m, AppUserDto.class))
+//                .findFirst();
+    }
     public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository
                 .findByEmail(appUser.getEmail())
