@@ -26,6 +26,8 @@ public class Video {
 
     private String details;
 
+    private String tutorName;
+
     public Video(String name, int price, byte[] data) {
         this.name = name;
         this.price = price;

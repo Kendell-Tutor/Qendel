@@ -24,8 +24,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final EmailValidator emailValidator;
     @Autowired
     private final ConfirmationTokenService confirmationTokenService;
-//    @Autowired
-//    private final EmailSender emailSender;
+    @Autowired
+    private final EmailSender emailSender;
     @Autowired
     private final AppUserRepository appUserRepository;
 //    @Autowired
@@ -62,7 +62,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                     System.out.println("The role didn't match");
             }
 
-        }else {
+        } else {
             System.out.println("empty role is not allowed");
         }
 
@@ -71,9 +71,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 //                request.getEmail(),
 //                buildEmail(request.getFirstName(), link));
 
-//        emailSender.sendEMail(
-//                request.getEmail(),
-//                buildEmail(request.getFirstName(), link),"Confirm");
+        emailSender.sendEMail(
+                request.getEmail(),
+                buildEmail(request.getFirstName(), link),"Confirm");
 
         return token;
     }

@@ -1,5 +1,6 @@
 package com.qendel.authenticationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,12 +17,12 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class AppUser implements UserDetails {
 
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "student_sequence")
     private Long id;
     private String firstName;
     private String lastName;
@@ -35,6 +36,7 @@ public class AppUser implements UserDetails {
     private Boolean enabled = false;
     private String phoneNumber;
     private char gender;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
     public AppUser(String firstName, String lastName, String email, String password, UserRole userRole) {

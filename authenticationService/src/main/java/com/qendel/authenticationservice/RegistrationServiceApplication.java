@@ -8,7 +8,7 @@ public class RegistrationServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RegistrationServiceApplication.class, args);
-        System.out.println("Hi from registration");
+        System.out.println("This is Qendel Tutoring platform......");
     }
 
 }

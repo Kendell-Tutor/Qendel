@@ -10,7 +10,7 @@ import java.util.OptionalDouble;
 public interface RatingService {
      Rating save(Rating rating) ;
      List<Rating> getRatingByTutor(Tutor tutor);
-   Rating findByTutorId(Long tutorId);
+     Rating findByTutorId(Long tutorId);
     //public OptionalDouble getAverageRatingByTutor(Tutor tutor)
 
      void deleteRating(Long id);

@@ -5,7 +5,6 @@ import com.qendel.authenticationservice.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,8 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AppUserDto {
-
+public class StudentDto {
     private String firstName;
     private String lastName;
     private String email;
