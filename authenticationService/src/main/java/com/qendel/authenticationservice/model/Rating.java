@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Table(name = "ratings")
-public class Rating {
+public class Rating  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +29,18 @@ public class Rating {
     @NotNull
     @Min(1)
     @Max(5)
-    private int rating;
+    private Integer rating;
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser user;
+    @JoinColumn(name = "student_id")
+    private Student student;
 
+
+    public Rating(Long id, Tutor tutor, int rating, String comment) {
+        this.id = id;
+        this.tutor = tutor;
+        this.rating = rating;
+        this.comment = comment;
+    }
 }
