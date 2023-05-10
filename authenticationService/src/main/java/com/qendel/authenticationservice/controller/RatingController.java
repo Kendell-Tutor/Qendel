@@ -1,5 +1,8 @@
 package com.qendel.authenticationservice.controller;
 
+import com.qendel.authenticationservice.dto.RatingCommentDto;
+import com.qendel.authenticationservice.dto.RatingDto;
+import com.qendel.authenticationservice.dto.RatingDtos;
 import com.qendel.authenticationservice.model.Rating;
 import com.qendel.authenticationservice.model.Tutor;
 import com.qendel.authenticationservice.service.RatingService;
@@ -9,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -18,11 +22,24 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
-    @PostMapping
-    public ResponseEntity<Rating> createRating(@RequestBody @Valid Rating rating) {
-        Rating savedRating = ratingService.save(rating);
+    @PostMapping("/post")
+    public ResponseEntity<RatingDtos> createRating(@RequestBody @Valid Rating rating) {
+        RatingDtos savedRating = ratingService.createRating(rating);
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<RatingDto>>  getByHighestRatings(@RequestParam Integer rates) {
+        List<RatingDto> highestRate= ratingService.findByHighestRating(rates);
+        return new ResponseEntity<>(highestRate, HttpStatus.OK);
+    }
+    @GetMapping("/review")
+    public ResponseEntity<List<RatingCommentDto>>  getByHighestRatings(@RequestParam String reviews) {
+        List<RatingCommentDto> tutorReview= ratingService.searchTutorByReview(reviews);
+        return new ResponseEntity<>(tutorReview, HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/tutors/{id}")
     public ResponseEntity<List<Rating>> getRatingsByTutor(@PathVariable Long id) {

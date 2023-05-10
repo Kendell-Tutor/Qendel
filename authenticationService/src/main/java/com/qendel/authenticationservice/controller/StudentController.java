@@ -34,6 +34,11 @@ public class StudentController {
     public StudentDto viewProfile(@PathVariable String name) {
         return studentService.viewProfile(name);
     }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')")
+    public StudentDto getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id);
+    }
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')")
