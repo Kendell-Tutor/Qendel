@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class RatingServiceImpl implements RatingService {
+
     @Autowired
     private RatingRepository ratingRepo;
     @Autowired
@@ -46,12 +47,13 @@ public class RatingServiceImpl implements RatingService {
         // rating.setStudent(rating.getStudent());
          rating.setComment(rating.getComment());
         return modelMapper.map(ratingRepo.save(rating),RatingDtos.class);
-
     }
+
 //    @Override
 //    public  List<Rating>  findByHighestRating(Integer rate) {
 //        return ratingRepo.findRatingsWithHighestRating(rate);
 //    }
+
 @Override
 public  List<RatingDto>  findByHighestRating(Integer rate) {
         List<Rating> highestRating= ratingRepo.findRatingsWithHighestRating(rate);
@@ -92,10 +94,8 @@ public  List<RatingDto>  findByHighestRating(Integer rate) {
 //        List<Rating> allHighestRating=  ratingRepo.findAll();
 //        Rating highest= allHighestRating.stream()
 //                .max(Comparator.comparing(Rating::getRating))
-//                .orElseThrow(()-> new RuntimeException(" Dont have highest rating"));
+//                .orElseThrow(()-> new RuntimeException(" Don't have highest rating"));
 //        System.out.println(highest+" Hi from highest rating");
 //        return highest;
-//
-//
 //    }
 }

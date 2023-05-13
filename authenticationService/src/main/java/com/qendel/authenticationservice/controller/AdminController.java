@@ -20,13 +20,14 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String adminAccess() {
+        System.out.println("Admin Board");
         return "Admin Board.";
     }
 
     @GetMapping("/tutor/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Optional<TutorDto> findTutorById(@PathVariable Long id) {
         var tutor = adminService.findTutorById(id);
         if (!tutor.isPresent()) {

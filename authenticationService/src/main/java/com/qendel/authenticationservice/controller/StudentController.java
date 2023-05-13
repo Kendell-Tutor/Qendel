@@ -3,6 +3,7 @@ package com.qendel.authenticationservice.controller;
 import com.qendel.authenticationservice.dto.StudentDto;
 import com.qendel.authenticationservice.model.Student;
 import com.qendel.authenticationservice.model.Video;
+import com.qendel.authenticationservice.service.AppUserService;
 import com.qendel.authenticationservice.service.StudentService;
 import com.qendel.authenticationservice.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Access;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,12 +30,15 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private VideoService videoService;
+    @Autowired
+    private AppUserService appUserService;
 
     @GetMapping("/view/{name}")
     @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')")
     public StudentDto viewProfile(@PathVariable String name) {
         return studentService.viewProfile(name);
     }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')")
     public StudentDto getStudentById(@PathVariable Long id) {
@@ -47,7 +52,7 @@ public class StudentController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','STUDENT','TUTOR')") // todo --- ?
     public StudentDto viewProfile(@PathVariable Long id, @RequestBody Student student) {
         return studentService.updateStudentProfile(id, student);
     }
@@ -75,5 +80,26 @@ public class StudentController {
                 .body(videoService.getAllVideosByTutorName(name).stream()
                         .map(v -> new ByteArrayResource(v.getData()))
                         .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/forgot_password")
+    public String showForgotPasswordForm() {
+        return null;
+    }
+
+    @PostMapping("/forgot_password")
+    public String processForgotPassword() {
+
+        return null;
+    }
+
+    @GetMapping("/reset_password")
+    public String showResetPasswordForm() {
+        return null;
+    }
+
+    @PostMapping("/reset_password")
+    public String processResetPassword() {
+        return null;
     }
 }

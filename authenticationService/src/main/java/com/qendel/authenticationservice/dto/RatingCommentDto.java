@@ -8,10 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RatingCommentDto {
+
     private RatingTutorDto tutor;
-    //private Integer rating;
-   private String comment;
-//
-//    private Student student;
+    private String comment;
 
 }

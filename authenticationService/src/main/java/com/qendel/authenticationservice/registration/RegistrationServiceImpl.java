@@ -105,7 +105,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 //  }
 //    }
 
-   @Override
+    @Override
     @Transactional
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService

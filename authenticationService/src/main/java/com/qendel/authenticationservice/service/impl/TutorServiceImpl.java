@@ -2,7 +2,9 @@ package com.qendel.authenticationservice.service.impl;
 
 import com.qendel.authenticationservice.dto.StudentDto;
 import com.qendel.authenticationservice.dto.TutorDto;
+import com.qendel.authenticationservice.email.EmailSender;
 import com.qendel.authenticationservice.exception.TutorNotFoundException;
+import com.qendel.authenticationservice.model.Admin;
 import com.qendel.authenticationservice.model.Student;
 import com.qendel.authenticationservice.model.Tutor;
 import com.qendel.authenticationservice.repository.StudentRepository;
@@ -10,6 +12,8 @@ import com.qendel.authenticationservice.repository.TutorRepository;
 import com.qendel.authenticationservice.service.TutorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,10 +25,13 @@ import java.util.stream.Collectors;
 @Transactional
 public class TutorServiceImpl implements TutorService {
 
+
+    @Autowired
+    private StudentRepository studentRepository;
     @Autowired
     private TutorRepository tutorRepository;
     @Autowired
-    private StudentRepository studentRepository;
+    private EmailSender emailSender;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -88,4 +95,5 @@ public class TutorServiceImpl implements TutorService {
         var student = studentRepository.findStudentByFirstName(name);
         return modelMapper.map(student,StudentDto.class);
     }
+
 }

@@ -30,14 +30,16 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-
     private Boolean locked = false;
-
     private Boolean enabled = false;
     private String phoneNumber;
     private char gender;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+    private String token;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime tokenCreationDate;
+
 
     public AppUser(String firstName, String lastName, String email, String password, UserRole userRole) {
         this.firstName = firstName;

@@ -2,11 +2,16 @@ package com.qendel.authenticationservice.service.impl;
 
 import com.qendel.authenticationservice.dto.StudentDto;
 import com.qendel.authenticationservice.dto.TutorDto;
+import com.qendel.authenticationservice.email.EmailSender;
+import com.qendel.authenticationservice.model.Admin;
+import com.qendel.authenticationservice.repository.AdminRepository;
 import com.qendel.authenticationservice.repository.StudentRepository;
 import com.qendel.authenticationservice.repository.TutorRepository;
 import com.qendel.authenticationservice.service.AdminService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +24,11 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
+    private AdminRepository adminRepository;
+    @Autowired
     private TutorRepository tutorRepository;
+    @Autowired
+    private EmailSender emailSender;
     @Autowired
     private ModelMapper modelMapper;
 
