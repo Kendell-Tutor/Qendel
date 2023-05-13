@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class TutorDto {
+
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private Boolean locked = false;
@@ -26,4 +26,5 @@ public class TutorDto {
     private char gender;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+
 }

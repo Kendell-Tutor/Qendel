@@ -2,6 +2,7 @@ package com.qendel.authenticationservice.service;
 
 import com.qendel.authenticationservice.dto.StudentDto;
 import com.qendel.authenticationservice.dto.TutorDto;
+import com.qendel.authenticationservice.model.Admin;
 import com.qendel.authenticationservice.model.Student;
 import com.qendel.authenticationservice.model.Tutor;
 
@@ -15,5 +16,4 @@ public interface AdminService {
     void deleteStudentById(Long id);
     Optional<TutorDto> findTutorById(Long id);
     Optional<StudentDto> findStudentById(Long id);
-
 }

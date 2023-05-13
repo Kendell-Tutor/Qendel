@@ -17,10 +17,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 public class RatingDto {
+
     private RatingTutorDto tutor;
     private Integer rating;
-//    private String comment;
-//
-//    private Student student;
 
 }

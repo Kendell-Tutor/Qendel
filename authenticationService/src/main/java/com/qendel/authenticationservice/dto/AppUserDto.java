@@ -19,7 +19,6 @@ public class AppUserDto {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private Boolean locked = false;

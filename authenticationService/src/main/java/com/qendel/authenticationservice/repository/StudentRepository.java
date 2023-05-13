@@ -1,5 +1,7 @@
 package com.qendel.authenticationservice.repository;
 
+import com.qendel.authenticationservice.model.Admin;
+import com.qendel.authenticationservice.model.AppUser;
 import com.qendel.authenticationservice.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +15,7 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(nativeQuery = true, value = "select * from Student where first_name =:name")
     Optional<Student> findStudentByFirstName(@Param("name") String name);
+    @Query(nativeQuery = true, value = "SELECT * FROM student WHERE email =:userEmail")
+    Student findAdminByEmail(String userEmail);
+
 }

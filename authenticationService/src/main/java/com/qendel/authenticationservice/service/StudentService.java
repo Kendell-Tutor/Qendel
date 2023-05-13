@@ -1,11 +1,10 @@
 package com.qendel.authenticationservice.service;
 
 import com.qendel.authenticationservice.dto.StudentDto;
-import com.qendel.authenticationservice.dto.TutorDto;
 import com.qendel.authenticationservice.model.Student;
-import com.qendel.authenticationservice.model.Video;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
 
 public interface StudentService {
     StudentDto viewProfile(String name);

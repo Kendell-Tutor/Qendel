@@ -33,16 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/users/**").hasAnyRole("STUDENT", "TUTOR", "ADMIN")
                 .antMatchers("/api/v1/users/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/users/tutor/**").hasAnyRole("TUTOR", "ADMIN")//.hasAnyRole("TUTOR", "ADMIN")
-                .antMatchers("/api/v1/users/student/**").hasAnyRole("STUDENT", "TUTOR", "ADMIN")//.hasAnyRole("STUDENT", "TUTOR", "ADMIN")
+                .antMatchers("/api/v1/users/tutor/**").hasAnyRole("TUTOR", "ADMIN")
+                .antMatchers("/api/v1/users/student/**").hasAnyRole("STUDENT", "TUTOR", "ADMIN")
                 .antMatchers("/api/v1/registration/**").permitAll()
-                .antMatchers("/api/v1/users/students/video/all").permitAll()//todo --> temporary for uploading video only
+                .antMatchers("/api/v1/users/students/video/all").permitAll()//todo --> temporary for uploading video only // hasRole("TUTOR")
                 .antMatchers("/**").permitAll()
                 .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .and()
+                .authenticated().and()
+                .formLogin().and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout");
@@ -81,8 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(appUserService);
         return provider;

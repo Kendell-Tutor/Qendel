@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class RatingTutorDto {
+
     private String firstName;
     private String lastName;
 }

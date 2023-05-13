@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 public class AppUserServiceImpl implements UserDetailsService, AppUserService {
 
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
+    private static final long EXPIRE_TOKEN_AFTER_MINUTES = 15;
     @Autowired
     private final AppUserRepository appUserRepository;
     @Autowired
@@ -51,16 +53,18 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
+
     @Override
     public Tutor searchTutorNameByUser(String name) {
         Tutor existingTutor = tutorRepository.getTutorByFirstName(name);
-         //AppUser existingUser= appUserRepository.findByEmail()
+        //AppUser existingUser= appUserRepository.findByEmail()
         return existingTutor;
 //        return appUserRepository.findAll().stream()
 //                .filter(u -> u.getFirstName().contains(name))
 //                .map(m -> modelMapper.map(m, AppUserDto.class))
 //                .findFirst();
     }
+
     public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository
                 .findByEmail(appUser.getEmail())
@@ -97,6 +101,80 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService {
 
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
+    }
+
+    /**
+     * Check whether the created token expired or not.
+     *
+     * @param tokenCreationDate
+     * @return true or false
+     */
+    private boolean isTokenExpired(final LocalDateTime tokenCreationDate) {
+
+        LocalDateTime now = LocalDateTime.now();
+        Duration diff = Duration.between(tokenCreationDate, now);
+
+        return diff.toMinutes() >= EXPIRE_TOKEN_AFTER_MINUTES;
+    }
+
+    @Override
+    public String forgotPassword(String email) {
+        var users = appUserRepository.findByEmail(email);
+        System.out.println("{} --------> We capture User with Email : " + users.get().getEmail() + " & role : " + users.get().getUserRole());
+
+        var userOptional = Optional.ofNullable(appUserRepository.findByEmail(email));
+
+        if (!userOptional.isPresent()) {
+            return "Invalid email id.";
+        }
+
+        var user = userOptional.get().get();
+        user.setToken(generateToken());
+        user.setTokenCreationDate(LocalDateTime.now());
+
+        user = appUserRepository.save(user);
+
+        return user.getToken();
+    }
+
+    @Override
+    public String resetPassword(String token, String password) {
+        var userOptional = Optional.ofNullable(appUserRepository.findByToken(token));
+
+        System.out.println("{} --------> Old password : " + userOptional.get().getPassword());
+
+        if (!userOptional.isPresent()) {
+            return "Invalid token.";
+        }
+
+        LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
+
+        if (isTokenExpired(tokenCreationDate)) {
+            return "Token expired.";
+
+        }
+
+        var user = userOptional.get();
+        String encodedPassword = bCryptPasswordEncoder.encode(password);
+        user.setPassword(encodedPassword);
+        user.setToken(null);
+        user.setTokenCreationDate(null);
+
+        appUserRepository.save(user);
+
+        return "Your password successfully updated.";
+    }
+
+    /**
+     * Generate unique token.
+     * token.
+     *
+     * @return unique token
+     */
+    private String generateToken() {
+        StringBuilder token = new StringBuilder();
+        return token.append(UUID.randomUUID().toString())
+                .append(UUID.randomUUID().toString()).toString();
     }
 
     /**

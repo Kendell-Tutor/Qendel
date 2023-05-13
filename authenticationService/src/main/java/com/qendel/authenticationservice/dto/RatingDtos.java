@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RatingDtos {
+
     private RatingTutorDto tutor;
     private Integer rating;
     private String comment;
-//
-   private Student student;
+    private Student student;
 
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppUserService {
+    String forgotPassword(String email);
+    String resetPassword(String token, String password);
     List<AppUserDto> findAllUsers();
 
     Tutor searchTutorNameByUser(String name);
